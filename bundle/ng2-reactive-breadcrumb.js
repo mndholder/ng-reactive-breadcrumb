@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-System.register("services/breadcrumbs.service", ['@angular/core', '@angular/router', 'rxjs'], function(exports_1, context_1) {
+System.register("src/services/breadcrumbs.service", ['@angular/core', '@angular/router', 'rxjs'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var core_1, router_1, rxjs_1;
@@ -181,7 +181,7 @@ System.register("services/breadcrumbs.service", ['@angular/core', '@angular/rout
         }
     }
 });
-System.register("components/breadcrumb.component", ['@angular/core', "services/breadcrumbs.service"], function(exports_2, context_2) {
+System.register("src/components/breadcrumb.component", ['@angular/core', "src/services/breadcrumbs.service"], function(exports_2, context_2) {
     "use strict";
     var __moduleName = context_2 && context_2.id;
     var core_2, breadcrumbs_service_1;
@@ -228,7 +228,7 @@ System.register("components/breadcrumb.component", ['@angular/core', "services/b
         }
     }
 });
-System.register("ng2-reactive-breadcrumb", ['@angular/core', '@angular/platform-browser', '@angular/common', '@angular/router', "components/breadcrumb.component", "services/breadcrumbs.service"], function(exports_3, context_3) {
+System.register("src/ng2-reactive-breadcrumb", ['@angular/core', '@angular/platform-browser', '@angular/common', '@angular/router', "src/components/breadcrumb.component", "src/services/breadcrumbs.service"], function(exports_3, context_3) {
     "use strict";
     var __moduleName = context_3 && context_3.id;
     var core_3, platform_browser_1, common_1, router_2, breadcrumb_component_1, breadcrumbs_service_2;
@@ -294,4 +294,23 @@ System.register("ng2-reactive-breadcrumb", ['@angular/core', '@angular/platform-
         }
     }
 });
-//# sourceMappingURL=ng2-breadcrumb.js.map
+System.register("ng2-reactive-breadcrumb", ["src/ng2-reactive-breadcrumb"], function(exports_4, context_4) {
+    "use strict";
+    var __moduleName = context_4 && context_4.id;
+    function exportStar_2(m) {
+        var exports = {};
+        for(var n in m) {
+            if (n !== "default") exports[n] = m[n];
+        }
+        exports_4(exports);
+    }
+    return {
+        setters:[
+            function (ng2_reactive_breadcrumb_1_1) {
+                exportStar_2(ng2_reactive_breadcrumb_1_1);
+            }],
+        execute: function() {
+        }
+    }
+});
+//# sourceMappingURL=ng2-reactive-breadcrumb.js.map
