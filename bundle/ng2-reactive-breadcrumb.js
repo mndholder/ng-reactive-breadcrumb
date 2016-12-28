@@ -218,7 +218,7 @@ System.register("src/components/breadcrumb.component", ['@angular/core', "src/se
                 BreadCrumbComponent = __decorate([
                     core_2.Component({
                         selector: 'ng2-reactive-breadcrumb',
-                        template: require('./breadcrumb.component.html')
+                        templateUrl: './breadcrumb.component.html'
                     }), 
                     __metadata('design:paramtypes', [breadcrumb_service_1.BreadCrumbService])
                 ], BreadCrumbComponent);

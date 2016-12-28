@@ -33,7 +33,7 @@ var BreadCrumbComponent = (function () {
     BreadCrumbComponent = __decorate([
         core_1.Component({
             selector: 'ng2-reactive-breadcrumb',
-            template: require('./breadcrumb.component.html')
+            templateUrl: './breadcrumb.component.html'
         }), 
         __metadata('design:paramtypes', [breadcrumb_service_1.BreadCrumbService])
     ], BreadCrumbComponent);
