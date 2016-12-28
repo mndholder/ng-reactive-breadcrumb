@@ -29,7 +29,7 @@ var BreadCrumbComponent = (function () {
         });
     }
     BreadCrumbComponent.prototype.getRouteName = function (url) {
-        return this._breadCrumbService.getRouteName(url).first();
+        return this._breadCrumbService.getRouteName(url);
     };
     BreadCrumbComponent.prototype.ngOnDestroy = function () {
         this._subscription.unsubscribe();

@@ -62,19 +62,19 @@ var BreadCrumbService = (function () {
         var _this = this;
         if (config.children) {
             config.children.forEach(function (childConfig) {
-                if (config.route instanceof RegExp || childConfig.route instanceof RegExp) {
+                if (config.path instanceof RegExp || childConfig.path instanceof RegExp) {
                     throw new Error('RegExp route config does not support child routes!');
                 }
                 else {
-                    childConfig.route = "" + config.route + childConfig.route;
+                    childConfig.path = "" + config.path + childConfig.path;
                 }
                 _this.configureRoute(childConfig);
             });
         }
-        var route = config.route;
+        var route = config.path;
         if (typeof (route) === 'string' && route.indexOf('*') !== -1) {
             route = new RegExp('^' + route.replace(/\*/g, '(?:[^\/]*)') + '$');
-            config.route = route;
+            config.path = route;
         }
         if (typeof (route) === 'string') {
             this._routeConfig.set(route, config);
@@ -88,32 +88,19 @@ var BreadCrumbService = (function () {
         routes.forEach(function (config) { return _this.configureRoute(config); });
     };
     BreadCrumbService.prototype.getRouteName = function (route) {
-        var _this = this;
         var config = this._findRouteConfig(route);
-        if (!config) {
-            // If no config return undefined as the name
+        if (!config || !config.name) {
             return Rx_1.Observable.of(this._generateDefaultRouteName(route));
         }
+        else if (config.name instanceof Rx_1.Observable) {
+            return config.name;
+        }
+        else if (typeof (config.name) === 'function') {
+            var callback_1 = config.name;
+            return Rx_1.Observable.create(function (observer) { return observer.next(callback_1(config)); });
+        }
         else {
-            if (config.name) {
-                // Name goes first
-                return Rx_1.Observable.of(config.name);
-            }
-            else if (config.callback) {
-                // If callback, then push the callback result to observable
-                config.name = config.callback();
-                return Rx_1.Observable.create(function (observer) {
-                    observer.next(config.callback.call(_this, config));
-                });
-            }
-            else if (config.observable) {
-                // If observable, then return the observable
-                return config.observable;
-            }
-            else {
-                // If none, return undefined
-                return Rx_1.Observable.of(this._generateDefaultRouteName(route));
-            }
+            return Rx_1.Observable.of(config.name);
         }
     };
     BreadCrumbService.prototype.isRouteHidden = function (route) {

@@ -33,7 +33,7 @@ export class BreadCrumbComponent implements OnDestroy {
     }
 
     getRouteName(url: string): Observable<string> {
-        return this._breadCrumbService.getRouteName(url).first();
+        return this._breadCrumbService.getRouteName(url);
     }
 
     ngOnDestroy() {

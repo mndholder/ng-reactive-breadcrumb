@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BreadCrumbService } from '../../../../src/ng2-reactive-breadcrumb';
+import { Observable } from 'rxjs';
+import { BreadCrumbService, IBreadCrumbRouteConfig } from '../../../../src/ng2-reactive-breadcrumb';
 
 import '../../../styles/app.scss';
 
@@ -27,9 +28,14 @@ export class AppComponent implements OnInit {
 
     ngOnInit() {
         this.breadCrumbsService.configure([
-            {route: '/one', name: 'ONE'},
-            {route: '/one/two', name: '2-as-two'},
-            {route: '/one/*/three', name: 'three-omg'}
+            {path: '/one', name: 'ONE'},
+            {path: '/one/two', name: '2-as-two'},
+            {path: '/one/*/three', name: 'three-omg'},
+            {path: '/one/two/three/four', name: (config: IBreadCrumbRouteConfig) => {
+                return (config.path as string).split('/').filter(el => !!el).join(' > ');
+            }},
+            {path: '/one/two/three/four/*', name: Observable.interval(1000)
+                .map((num) => `Time elapsed: ${num}s`)}
         ]);
     }
 }
