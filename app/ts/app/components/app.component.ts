@@ -7,14 +7,17 @@ import '../../../styles/app.scss';
     selector: 'ng2-app',
     template: `
         <ng2-reactive-breadcrumb></ng2-reactive-breadcrumb>
-        <ul>
-            <li><a [routerLink]="'/one'">One</a></li>
-            <li><a [routerLink]="'/one/two'">Two</a></li>
-            <li><a [routerLink]="'/one/two/three'">Three</a></li>
-            <li><a [routerLink]="'/one/two/three/four'">Four</a></li>
-            <li><a [routerLink]="'/one/two/three/four/five'">Five</a></li>
-        </ul>
-        <router-outlet></router-outlet>
+        <div class="container">
+          <p>Click on the links below and look how the breadcrumb trail changes.</p>
+          <ul>
+              <li><a [routerLink]="'/one'">One</a></li>
+              <li><a [routerLink]="'/one/two'">Two</a></li>
+              <li><a [routerLink]="'/one/two/three'">Three</a></li>
+              <li><a [routerLink]="'/one/two/three/four'">Four</a></li>
+              <li><a [routerLink]="'/one/two/three/four/five'">Five</a></li>
+          </ul>
+          <router-outlet></router-outlet>
+        </div>
     `
 })
 export class AppComponent implements OnInit {
