@@ -19,6 +19,9 @@
     "app:server": "http-server dist/ --push-state",
     "preapp:serve": "npm run build",
     "app:serve": "npm run server",
+    "bundle": "tsc --project ./src/tsconfig.json -m system --rootDir ./src --outFile ./bundle/ng2-breadcrumb.js",
+    "transpile": "tsc --project ./src/tsconfig.json",
+    "build": "npm run transpile && npm run bundle",
     "start": "npm run app:dev",
     "start:hmr": "npm run app:dev -- --hot"
   },
