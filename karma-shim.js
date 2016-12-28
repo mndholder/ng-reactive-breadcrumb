@@ -23,11 +23,13 @@ require('zone.js/dist/fake-async-test');
  we say do this recursively
  */
 var appContext = require.context('./app/ts', true, /\.spec\.ts/);
+var srcContext = require.context('./src', true, /\.spec\.ts/);
 
 // get all the files, for each file, call the context function
 // that will require the file and load it up here. Context will
 // loop and require those spec files here
 appContext.keys().forEach(appContext);
+srcContext.keys().forEach(srcContext);
 
 // Select BrowserDomAdapter.
 // see https://github.com/AngularClass/angular2-webpack-starter/issues/124

@@ -166,4 +166,4 @@ var BreadCrumbService = (function () {
     return BreadCrumbService;
 }());
 exports.BreadCrumbService = BreadCrumbService;
-//# sourceMappingURL=breadcrumbs.service.js.map
+//# sourceMappingURL=breadcrumb.service.js.map

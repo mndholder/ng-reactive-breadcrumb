@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var breadcrumbs_service_1 = require('../services/breadcrumbs.service');
+var breadcrumb_service_1 = require('../services/breadcrumb.service');
 var BreadCrumbComponent = (function () {
     function BreadCrumbComponent(_breadCrumbService) {
         var _this = this;
@@ -35,7 +35,7 @@ var BreadCrumbComponent = (function () {
             selector: 'ng2-reactive-breadcrumb',
             template: require('./breadcrumb.component.html')
         }), 
-        __metadata('design:paramtypes', [breadcrumbs_service_1.BreadCrumbService])
+        __metadata('design:paramtypes', [breadcrumb_service_1.BreadCrumbService])
     ], BreadCrumbComponent);
     return BreadCrumbComponent;
 }());

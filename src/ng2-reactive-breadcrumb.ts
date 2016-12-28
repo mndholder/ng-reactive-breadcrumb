@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { BreadCrumbComponent } from './components/breadcrumb.component';
-import { BreadCrumbService } from './services/breadcrumbs.service';
+import { BreadCrumbService } from './services/breadcrumb.service';
 
 @NgModule({
     imports: [
@@ -25,4 +25,4 @@ import { BreadCrumbService } from './services/breadcrumbs.service';
 export class Ng2ReactiveBreadCrumbModule {}
 
 export * from './components/breadcrumb.component';
-export * from './services/breadcrumbs.service';
+export * from './services/breadcrumb.service';

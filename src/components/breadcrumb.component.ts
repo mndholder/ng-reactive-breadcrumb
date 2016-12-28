@@ -1,10 +1,10 @@
 import { Component, Input, OnDestroy } from '@angular/core';
 import { Subscription, Observable } from 'rxjs';
-import { BreadCrumbService } from '../services/breadcrumbs.service';
+import { BreadCrumbService } from '../services/breadcrumb.service';
 
 @Component({
     selector: 'ng2-reactive-breadcrumb',
-    template: require('./breadcrumb.component.html')
+    templateUrl: './breadcrumb.component.html'
 })
 export class BreadCrumbComponent implements OnDestroy {
 

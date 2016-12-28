@@ -15,9 +15,9 @@ var WebpackNotifierPlugin = require('webpack-notifier');
  * Get npm lifecycle event to identify the environment
  */
 var ENV = process.env.npm_lifecycle_event;
-var isTestWatch = ENV === 'test-watch';
-var isTest = ENV === 'test' || isTestWatch;
-var isProd = ENV === 'build';
+var isTestWatch = ENV === 'app:test-watch';
+var isTest = ENV === 'app:test' || isTestWatch;
+var isProd = ENV === 'app:build';
 
 module.exports = function makeWebpackConfig() {
     /**
@@ -146,7 +146,10 @@ module.exports = function makeWebpackConfig() {
         config.module.rules.push({
             test: /\.ts$/,
             enforce: 'post',
-            include: path.resolve('app'),
+            include: [
+                root('app'),
+                root('src')
+            ],
             loader: 'istanbul-instrumenter-loader',
             exclude: [/\.spec\.ts$/, /\.e2e\.ts$/, /node_modules/]
         });

@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-System.register("src/services/breadcrumbs.service", ['@angular/core', '@angular/router', 'rxjs'], function(exports_1, context_1) {
+System.register("src/services/breadcrumb.service", ['@angular/core', '@angular/router', 'rxjs'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var core_1, router_1, rxjs_1;
@@ -181,18 +181,18 @@ System.register("src/services/breadcrumbs.service", ['@angular/core', '@angular/
         }
     }
 });
-System.register("src/components/breadcrumb.component", ['@angular/core', "src/services/breadcrumbs.service"], function(exports_2, context_2) {
+System.register("src/components/breadcrumb.component", ['@angular/core', "src/services/breadcrumb.service"], function(exports_2, context_2) {
     "use strict";
     var __moduleName = context_2 && context_2.id;
-    var core_2, breadcrumbs_service_1;
+    var core_2, breadcrumb_service_1;
     var BreadCrumbComponent;
     return {
         setters:[
             function (core_2_1) {
                 core_2 = core_2_1;
             },
-            function (breadcrumbs_service_1_1) {
-                breadcrumbs_service_1 = breadcrumbs_service_1_1;
+            function (breadcrumb_service_1_1) {
+                breadcrumb_service_1 = breadcrumb_service_1_1;
             }],
         execute: function() {
             BreadCrumbComponent = (function () {
@@ -220,7 +220,7 @@ System.register("src/components/breadcrumb.component", ['@angular/core', "src/se
                         selector: 'ng2-reactive-breadcrumb',
                         template: require('./breadcrumb.component.html')
                     }), 
-                    __metadata('design:paramtypes', [breadcrumbs_service_1.BreadCrumbService])
+                    __metadata('design:paramtypes', [breadcrumb_service_1.BreadCrumbService])
                 ], BreadCrumbComponent);
                 return BreadCrumbComponent;
             }());
@@ -228,10 +228,10 @@ System.register("src/components/breadcrumb.component", ['@angular/core', "src/se
         }
     }
 });
-System.register("src/ng2-reactive-breadcrumb", ['@angular/core', '@angular/platform-browser', '@angular/common', '@angular/router', "src/components/breadcrumb.component", "src/services/breadcrumbs.service"], function(exports_3, context_3) {
+System.register("src/ng2-reactive-breadcrumb", ['@angular/core', '@angular/platform-browser', '@angular/common', '@angular/router', "src/components/breadcrumb.component", "src/services/breadcrumb.service"], function(exports_3, context_3) {
     "use strict";
     var __moduleName = context_3 && context_3.id;
-    var core_3, platform_browser_1, common_1, router_2, breadcrumb_component_1, breadcrumbs_service_2;
+    var core_3, platform_browser_1, common_1, router_2, breadcrumb_component_1, breadcrumb_service_2;
     var Ng2ReactiveBreadCrumbModule;
     var exportedNames_1 = {
         'Ng2ReactiveBreadCrumbModule': true
@@ -261,9 +261,9 @@ System.register("src/ng2-reactive-breadcrumb", ['@angular/core', '@angular/platf
                 breadcrumb_component_1 = breadcrumb_component_1_1;
                 exportStar_1(breadcrumb_component_1_1);
             },
-            function (breadcrumbs_service_2_1) {
-                breadcrumbs_service_2 = breadcrumbs_service_2_1;
-                exportStar_1(breadcrumbs_service_2_1);
+            function (breadcrumb_service_2_1) {
+                breadcrumb_service_2 = breadcrumb_service_2_1;
+                exportStar_1(breadcrumb_service_2_1);
             }],
         execute: function() {
             Ng2ReactiveBreadCrumbModule = (function () {
@@ -280,7 +280,7 @@ System.register("src/ng2-reactive-breadcrumb", ['@angular/core', '@angular/platf
                             breadcrumb_component_1.BreadCrumbComponent
                         ],
                         providers: [
-                            breadcrumbs_service_2.BreadCrumbService
+                            breadcrumb_service_2.BreadCrumbService
                         ],
                         exports: [
                             breadcrumb_component_1.BreadCrumbComponent

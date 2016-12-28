@@ -15,7 +15,7 @@
     "app:test": "karma start",
     "postapp:test": "remap-istanbul -i coverage/json/coverage-final.json -o coverage/html -t html",
     "app:test-watch": "karma start --no-single-run --auto-watch",
-    "app:docs": "typedoc --options typedoc.json src/app/app.component.ts",
+    "app:docs": "typedoc --options typedoc.json",
     "app:server": "http-server dist/ --push-state",
     "preapp:serve": "npm run app:build",
     "app:serve": "npm run app:server",
@@ -24,7 +24,8 @@
     "build": "npm run transpile && npm run bundle",
     "lint": "tslint \"src/**/*.ts\"",
     "start": "npm run app:dev",
-    "start:hmr": "npm run app:dev -- --hot"
+    "start:hmr": "npm run app:dev -- --hot",
+    "test": "npm run app:test"
   },
   "dependencies": {
     "@angular/common": "2.4.1",
