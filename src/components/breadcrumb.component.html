@@ -1,0 +1,21 @@
+<ol class="mmp-breadcrumbs breadcrumb">
+  <li
+    *ngFor="let url of urls; let last = last"
+    [ngClass]="{'active': last}"
+  >
+    <!-- Render link if not the last one -->
+    <a role="button"
+       *ngIf="!last"
+       [routerLink]="url"
+    >
+      {{getRouteName(url) | async}}
+    </a>
+
+    <!-- Render span for the last link in the sequence -->
+    <span
+      *ngIf="last"
+    >
+      {{getRouteName(url) | async}}
+    </span>
+  </li>
+</ol>
