@@ -2,10 +2,23 @@ import { Component, Input, OnDestroy } from '@angular/core';
 import { Subscription, Observable } from 'rxjs';
 import { BreadCrumbService } from '../services/breadcrumb.service';
 
-@Component({
-    selector: 'ng2-reactive-breadcrumb',
-    templateUrl: './breadcrumb.component.html'
-})
+export class BreadCrumbComponentMetadata {
+    selector: string = 'ng2-reactive-breadcrumb';
+    template: string = `
+        <ol class="mmp-breadcrumbs breadcrumb">
+            <li *ngFor="let url of urls; let last = last" [ngClass]="{'active': last}">
+                <a role="button" *ngIf="!last" [routerLink]="url">
+                    {{getRouteName(url) | async}}
+                </a>
+                <span *ngIf="last">
+                    {{getRouteName(url) | async}}
+                </span>
+            </li>
+        </ol>
+    `;
+}
+
+@Component(new BreadCrumbComponentMetadata())
 export class BreadCrumbComponent implements OnDestroy {
 
     private _subscription: Subscription;

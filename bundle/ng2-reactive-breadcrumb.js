@@ -185,7 +185,7 @@ System.register("src/components/breadcrumb.component", ['@angular/core', "src/se
     "use strict";
     var __moduleName = context_2 && context_2.id;
     var core_2, breadcrumb_service_1;
-    var BreadCrumbComponent;
+    var BreadCrumbComponentMetadata, BreadCrumbComponent;
     return {
         setters:[
             function (core_2_1) {
@@ -195,6 +195,14 @@ System.register("src/components/breadcrumb.component", ['@angular/core', "src/se
                 breadcrumb_service_1 = breadcrumb_service_1_1;
             }],
         execute: function() {
+            BreadCrumbComponentMetadata = (function () {
+                function BreadCrumbComponentMetadata() {
+                    this.selector = 'ng2-reactive-breadcrumb';
+                    this.template = "\n        <ol class=\"mmp-breadcrumbs breadcrumb\">\n            <li *ngFor=\"let url of urls; let last = last\" [ngClass]=\"{'active': last}\">\n                <a role=\"button\" *ngIf=\"!last\" [routerLink]=\"url\">\n                    {{getRouteName(url) | async}}\n                </a>\n                <span *ngIf=\"last\">\n                    {{getRouteName(url) | async}}\n                </span>\n            </li>\n        </ol>\n    ";
+                }
+                return BreadCrumbComponentMetadata;
+            }());
+            exports_2("BreadCrumbComponentMetadata", BreadCrumbComponentMetadata);
             BreadCrumbComponent = (function () {
                 function BreadCrumbComponent(_breadCrumbService) {
                     var _this = this;
@@ -216,10 +224,7 @@ System.register("src/components/breadcrumb.component", ['@angular/core', "src/se
                     __metadata('design:type', Number)
                 ], BreadCrumbComponent.prototype, "min", void 0);
                 BreadCrumbComponent = __decorate([
-                    core_2.Component({
-                        selector: 'ng2-reactive-breadcrumb',
-                        templateUrl: './breadcrumb.component.html'
-                    }), 
+                    core_2.Component(new BreadCrumbComponentMetadata()), 
                     __metadata('design:paramtypes', [breadcrumb_service_1.BreadCrumbService])
                 ], BreadCrumbComponent);
                 return BreadCrumbComponent;
