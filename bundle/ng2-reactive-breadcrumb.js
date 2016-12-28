@@ -7,10 +7,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-System.register("src/services/breadcrumb.service", ['@angular/core', '@angular/router', 'rxjs'], function(exports_1, context_1) {
+System.register("src/services/breadcrumb.service", ['@angular/core', '@angular/router', 'rxjs/Rx'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var core_1, router_1, rxjs_1;
+    var core_1, router_1, Rx_1;
     var NavigationStatus, BreadCrumbService;
     return {
         setters:[
@@ -20,8 +20,8 @@ System.register("src/services/breadcrumb.service", ['@angular/core', '@angular/r
             function (router_1_1) {
                 router_1 = router_1_1;
             },
-            function (rxjs_1_1) {
-                rxjs_1 = rxjs_1_1;
+            function (Rx_1_1) {
+                Rx_1 = Rx_1_1;
             }],
         execute: function() {
             (function (NavigationStatus) {
@@ -34,7 +34,7 @@ System.register("src/services/breadcrumb.service", ['@angular/core', '@angular/r
                     var _this = this;
                     this._router = _router;
                     // Current breadcrumb trail subject
-                    this._trail = new rxjs_1.Subject();
+                    this._trail = new Rx_1.Subject();
                     // Current route
                     this._currentRoute = '';
                     // Map to save route config by the route's name
@@ -104,17 +104,17 @@ System.register("src/services/breadcrumb.service", ['@angular/core', '@angular/r
                     var config = this._findRouteConfig(route);
                     if (!config) {
                         // If no config return undefined as the name
-                        return rxjs_1.Observable.of(this._generateDefaultRouteName(route));
+                        return Rx_1.Observable.of(this._generateDefaultRouteName(route));
                     }
                     else {
                         if (config.name) {
                             // Name goes first
-                            return rxjs_1.Observable.of(config.name);
+                            return Rx_1.Observable.of(config.name);
                         }
                         else if (config.callback) {
                             // If callback, then push the callback result to observable
                             config.name = config.callback();
-                            return rxjs_1.Observable.create(function (observer) {
+                            return Rx_1.Observable.create(function (observer) {
                                 observer.next(config.callback.call(_this, config));
                             });
                         }
@@ -124,7 +124,7 @@ System.register("src/services/breadcrumb.service", ['@angular/core', '@angular/r
                         }
                         else {
                             // If none, return undefined
-                            return rxjs_1.Observable.of(this._generateDefaultRouteName(route));
+                            return Rx_1.Observable.of(this._generateDefaultRouteName(route));
                         }
                     }
                 };

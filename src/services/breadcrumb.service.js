@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
-var rxjs_1 = require('rxjs');
+var Rx_1 = require('rxjs/Rx');
 var NavigationStatus;
 (function (NavigationStatus) {
     NavigationStatus[NavigationStatus["START"] = 1] = "START";
@@ -22,7 +22,7 @@ var BreadCrumbService = (function () {
         var _this = this;
         this._router = _router;
         // Current breadcrumb trail subject
-        this._trail = new rxjs_1.Subject();
+        this._trail = new Rx_1.Subject();
         // Current route
         this._currentRoute = '';
         // Map to save route config by the route's name
@@ -92,17 +92,17 @@ var BreadCrumbService = (function () {
         var config = this._findRouteConfig(route);
         if (!config) {
             // If no config return undefined as the name
-            return rxjs_1.Observable.of(this._generateDefaultRouteName(route));
+            return Rx_1.Observable.of(this._generateDefaultRouteName(route));
         }
         else {
             if (config.name) {
                 // Name goes first
-                return rxjs_1.Observable.of(config.name);
+                return Rx_1.Observable.of(config.name);
             }
             else if (config.callback) {
                 // If callback, then push the callback result to observable
                 config.name = config.callback();
-                return rxjs_1.Observable.create(function (observer) {
+                return Rx_1.Observable.create(function (observer) {
                     observer.next(config.callback.call(_this, config));
                 });
             }
@@ -112,7 +112,7 @@ var BreadCrumbService = (function () {
             }
             else {
                 // If none, return undefined
-                return rxjs_1.Observable.of(this._generateDefaultRouteName(route));
+                return Rx_1.Observable.of(this._generateDefaultRouteName(route));
             }
         }
     };
