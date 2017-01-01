@@ -89,19 +89,30 @@ var BreadCrumbService = (function () {
     };
     BreadCrumbService.prototype.getRouteName = function (route) {
         var config = this._findRouteConfig(route);
-        if (!config || !config.name) {
-            return Rx_1.Observable.of(this._generateDefaultRouteName(route));
+        switch (true) {
+            // if no config or no name, we'll generate the name
+            case !config || !config.name:
+                config.name = Rx_1.Observable.of(this._generateDefaultRouteName(route));
+                break;
+            // if name is a string, return an Observable
+            case typeof (config.name) === 'string':
+                config.name = Rx_1.Observable.of(config.name);
+                break;
+            // if name is a function, return an Observable from callback
+            case typeof (config.name) === 'function':
+                var callback_1 = config.name;
+                config.name = Rx_1.Observable.create(function (observer) { return observer.next(callback_1(route)); });
+                break;
+            // convert subject to observable
+            case config.name instanceof Rx_1.Subject:
+                config.name = config.name.asObservable();
+                break;
+            // convert promise to observable
+            case config.name instanceof Promise:
+                config.name = Rx_1.Observable.fromPromise(config.name);
+                break;
         }
-        else if (config.name instanceof Rx_1.Observable) {
-            return config.name;
-        }
-        else if (typeof (config.name) === 'function') {
-            var callback_1 = config.name;
-            return Rx_1.Observable.create(function (observer) { return observer.next(callback_1(config)); });
-        }
-        else {
-            return Rx_1.Observable.of(config.name);
-        }
+        return config.name;
     };
     BreadCrumbService.prototype.isRouteHidden = function (route) {
         var config = this._findRouteConfig(route);
