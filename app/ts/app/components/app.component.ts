@@ -16,6 +16,7 @@ import '../../../styles/app.scss';
               <li><a [routerLink]="'/one/two/three'">Three</a></li>
               <li><a [routerLink]="'/one/two/three/four'">Four</a></li>
               <li><a [routerLink]="'/one/two/three/four/five'">Five</a></li>
+              <li><a [routerLink]="'/one/two/three/four/five/six'">Six</a></li>
           </ul>
           <router-outlet></router-outlet>
         </div>
@@ -38,7 +39,10 @@ export class AppComponent implements OnInit {
                 {path: '/*', name: Observable.interval(1000)
                     .startWith(0)
                     .map((num) => `Time elapsed: ${num}s`)},
-            ]},
+                {path: '/five/six', name: new Promise(resolve => {
+                    setTimeout(() => resolve('Six: 1000ms'), 1000);
+                })}
+            ]}
         ]);
     }
 }

@@ -1,16 +1,16 @@
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, Route } from '@angular/router';
 import { TestComponent } from './components/test.component';
 
+const ROUTES = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
+
 const routes: Routes = [
-    {path: 'one', component: TestComponent, children: [
-        {path: 'two', component: TestComponent, children: [
-            {path: 'three', component: TestComponent, children: [
-                {path: 'four', component: TestComponent, children: [
-                    {path: 'five', component: TestComponent}
-                ]}
-            ]}
-        ]}
-    ]},
+    ROUTES.reduceRight((prev: Route, val) => {
+        return Object.assign(
+            {},
+            {path: val, component: TestComponent},
+            prev.path ? {children: [prev]} : undefined
+        );
+    }, {}),
     {path: '**', redirectTo: 'one'}
 ];
 
