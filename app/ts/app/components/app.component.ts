@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BreadCrumbService } from '../../../../src/ng2-reactive-breadcrumb';
 
@@ -17,12 +17,16 @@ import '../../../styles/app.scss';
               <li><a [routerLink]="'/one/two/three/four'">Four</a></li>
               <li><a [routerLink]="'/one/two/three/four/five'">Five</a></li>
               <li><a [routerLink]="'/one/two/three/four/five/six'">Six</a></li>
+              <li><a [routerLink]="'/one/two/three/four/five/six/seven'">Seven</a></li>
           </ul>
           <router-outlet></router-outlet>
+          <button class="btn btn-primary" (click)="onClick()">Set name for /seven</button>
         </div>
     `
 })
 export class AppComponent implements OnInit {
+    public ee: EventEmitter<string> = new EventEmitter<string>();
+
     constructor(
         private breadCrumbsService: BreadCrumbService
     ) {}
@@ -41,8 +45,13 @@ export class AppComponent implements OnInit {
                     .map((num) => `Time elapsed: ${num}s`)},
                 {path: '/five/six', name: new Promise(resolve => {
                     setTimeout(() => resolve('Six: 1000ms'), 1000);
-                })}
+                })},
+                {path: '/five/six/seven', name: this.ee}
             ]}
         ]);
+    }
+
+    onClick() {
+        this.ee.emit(Math.random().toFixed(2).toString());
     }
 }

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Router, NavigationEnd, NavigationStart, RoutesRecognized } from '@angular/router';
 import { Subject, Observable } from 'rxjs/Rx';
 
@@ -8,7 +8,7 @@ import { Subject, Observable } from 'rxjs/Rx';
  */
 export interface IBreadCrumbRouteConfig {
     path: string | RegExp;
-    name?: string | Function | Observable<any> | Subject<any> | Promise<any>;
+    name?: string | Function | Observable<any> | Subject<any> | Promise<any> | EventEmitter<any>;
     hidden?: boolean;
     children?: IBreadCrumbRouteConfig[];
 }
@@ -91,7 +91,7 @@ export class BreadCrumbService {
         routes.forEach(config => this.configureRoute(config));
     }
 
-    getRouteName(route: string): Observable<any> {
+    getRouteName(route: string): Observable<any> | EventEmitter<any> {
         let config: IBreadCrumbRouteConfig = this._findRouteConfig(route);
         switch (true) {
             // if no config or no name, we'll generate the name
@@ -115,11 +115,9 @@ export class BreadCrumbService {
             case config.name instanceof Promise:
                 config.name = Observable.fromPromise((config.name as Promise<any>));
                 break;
-            // if Observable, just return it
-            case config.name instanceof Observable:
-                break;
+            // if Observable or EventEmitter - just return it
         }
-        return config.name as Observable<any>;
+        return config.name as Observable<any> | EventEmitter<any>;
     }
 
     isRouteHidden(route: string): boolean {
