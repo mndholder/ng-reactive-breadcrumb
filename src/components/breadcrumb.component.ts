@@ -5,7 +5,7 @@ import { BreadCrumbService } from '../services/breadcrumb.service';
 export class BreadCrumbComponentMetadata {
     selector: string = 'ng2-reactive-breadcrumb';
     template: string = `
-        <ol class="mmp-breadcrumbs breadcrumb">
+        <ol class="breadcrumb">
             <li *ngFor="let url of urls; let last = last" [ngClass]="{'active': last}">
                 <a role="button" *ngIf="!last" [routerLink]="url">
                     {{getRouteName(url) | async}}
@@ -25,7 +25,9 @@ export class BreadCrumbComponent implements OnDestroy {
     public urls: string[];
     @Input() public min: number = 0;
 
-    constructor(protected _breadCrumbService: BreadCrumbService) {
+    constructor(
+        protected _breadCrumbService: BreadCrumbService
+    ) {
         this._subscription = this._breadCrumbService.trail
             .subscribe((urls: string[]) => {
                 this.urls = urls.length >= this.min ? urls : [];

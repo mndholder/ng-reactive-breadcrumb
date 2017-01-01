@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { BreadCrumbService, IBreadCrumbRouteConfig } from '../../../../src/ng2-reactive-breadcrumb';
+import { BreadCrumbService } from '../../../../src/ng2-reactive-breadcrumb';
 
 import '../../../styles/app.scss';
 
@@ -29,13 +29,16 @@ export class AppComponent implements OnInit {
     ngOnInit() {
         this.breadCrumbsService.configure([
             {path: '/one', name: 'ONE'},
-            {path: '/one/two', name: '2-as-two'},
-            {path: '/one/*/three', name: 'three-omg'},
-            {path: '/one/two/three/four', name: (config: IBreadCrumbRouteConfig) => {
-                return (config.path as string).split('/').filter(el => !!el).join(' > ');
-            }},
-            {path: '/one/two/three/four/*', name: Observable.interval(1000)
-                .map((num) => `Time elapsed: ${num}s`)}
+            {path: '/one/two', name: '2-as-two', children: [
+                {path: '/three', name: ((path: string) => {
+                    return path.split('/').filter(el => !!el).join(' > ');
+                })}
+            ]},
+            {path: '/one/*/three/four', name: 'Four', children: [
+                {path: '/*', name: Observable.interval(1000)
+                    .startWith(0)
+                    .map((num) => `Time elapsed: ${num}s`)},
+            ]},
         ]);
     }
 }
