@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'ng2-test',
+    selector: 'ng-test',
     template: '<router-outlet></router-outlet>'
 })
 export class TestComponent {}

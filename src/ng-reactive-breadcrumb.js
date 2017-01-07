@@ -44,4 +44,4 @@ var Ng2ReactiveBreadCrumbModule = (function () {
 exports.Ng2ReactiveBreadCrumbModule = Ng2ReactiveBreadCrumbModule;
 __export(require('./components/breadcrumb.component'));
 __export(require('./services/breadcrumb.service'));
-//# sourceMappingURL=ng2-reactive-breadcrumb.js.map
+//# sourceMappingURL=ng-reactive-breadcrumb.js.map

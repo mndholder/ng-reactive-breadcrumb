@@ -1,4 +1,4 @@
-# ng2-reactive-breadcrumb
+# ng-reactive-breadcrumb
 
 # Examples
 

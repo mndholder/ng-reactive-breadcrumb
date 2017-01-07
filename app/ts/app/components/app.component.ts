@@ -1,13 +1,13 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
-import { BreadCrumbService } from '../../../../src/ng2-reactive-breadcrumb';
+import { BreadCrumbService } from '../../../../src/ng-reactive-breadcrumb';
 
 import '../../../styles/app.scss';
 
 @Component({
-    selector: 'ng2-app',
+    selector: 'ng-app',
     template: `
-        <ng2-reactive-breadcrumb></ng2-reactive-breadcrumb>
+        <ng-reactive-breadcrumb></ng-reactive-breadcrumb>
         <div class="container">
           <p>Click on the links below and look how the breadcrumb trail changes.</p>
           <ul>

@@ -1,1 +1,1 @@
-export * from './src/ng2-reactive-breadcrumb';
+export * from './src/ng-reactive-breadcrumb';

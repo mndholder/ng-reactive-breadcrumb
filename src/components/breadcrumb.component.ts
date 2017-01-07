@@ -3,7 +3,7 @@ import { Subscription, Observable } from 'rxjs';
 import { BreadCrumbService } from '../services/breadcrumb.service';
 
 export class BreadCrumbComponentMetadata {
-    selector: string = 'ng2-reactive-breadcrumb';
+    selector: string = 'ng-reactive-breadcrumb';
     template: string = `
         <ol class="breadcrumb">
             <li *ngFor="let url of urls; let last = last" [ngClass]="{'active': last}">

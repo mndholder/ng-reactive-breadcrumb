@@ -12,7 +12,7 @@ var core_1 = require('@angular/core');
 var breadcrumb_service_1 = require('../services/breadcrumb.service');
 var BreadCrumbComponentMetadata = (function () {
     function BreadCrumbComponentMetadata() {
-        this.selector = 'ng2-reactive-breadcrumb';
+        this.selector = 'ng-reactive-breadcrumb';
         this.template = "\n        <ol class=\"breadcrumb\">\n            <li *ngFor=\"let url of urls; let last = last\" [ngClass]=\"{'active': last}\">\n                <a role=\"button\" *ngIf=\"!last\" [routerLink]=\"url\">\n                    {{getRouteName(url) | async}}\n                </a>\n                <span *ngIf=\"last\">\n                    {{getRouteName(url) | async}}\n                </span>\n            </li>\n        </ol>\n    ";
     }
     return BreadCrumbComponentMetadata;

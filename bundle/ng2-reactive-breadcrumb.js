@@ -195,7 +195,7 @@ System.register("src/components/breadcrumb.component", ['@angular/core', "src/se
         execute: function() {
             BreadCrumbComponentMetadata = (function () {
                 function BreadCrumbComponentMetadata() {
-                    this.selector = 'ng2-reactive-breadcrumb';
+                    this.selector = 'ng-reactive-breadcrumb';
                     this.template = "\n        <ol class=\"breadcrumb\">\n            <li *ngFor=\"let url of urls; let last = last\" [ngClass]=\"{'active': last}\">\n                <a role=\"button\" *ngIf=\"!last\" [routerLink]=\"url\">\n                    {{getRouteName(url) | async}}\n                </a>\n                <span *ngIf=\"last\">\n                    {{getRouteName(url) | async}}\n                </span>\n            </li>\n        </ol>\n    ";
                 }
                 return BreadCrumbComponentMetadata;
@@ -231,7 +231,7 @@ System.register("src/components/breadcrumb.component", ['@angular/core', "src/se
         }
     }
 });
-System.register("src/ng2-reactive-breadcrumb", ['@angular/core', '@angular/platform-browser', '@angular/common', '@angular/router', "src/components/breadcrumb.component", "src/services/breadcrumb.service"], function(exports_3, context_3) {
+System.register("src/ng-reactive-breadcrumb", ['@angular/core', '@angular/platform-browser', '@angular/common', '@angular/router', "src/components/breadcrumb.component", "src/services/breadcrumb.service"], function(exports_3, context_3) {
     "use strict";
     var __moduleName = context_3 && context_3.id;
     var core_3, platform_browser_1, common_1, router_2, breadcrumb_component_1, breadcrumb_service_2;
@@ -297,7 +297,7 @@ System.register("src/ng2-reactive-breadcrumb", ['@angular/core', '@angular/platf
         }
     }
 });
-System.register("ng2-reactive-breadcrumb", ["src/ng2-reactive-breadcrumb"], function(exports_4, context_4) {
+System.register("ng2-reactive-breadcrumb", ["src/ng-reactive-breadcrumb"], function(exports_4, context_4) {
     "use strict";
     var __moduleName = context_4 && context_4.id;
     function exportStar_2(m) {
@@ -309,8 +309,8 @@ System.register("ng2-reactive-breadcrumb", ["src/ng2-reactive-breadcrumb"], func
     }
     return {
         setters:[
-            function (ng2_reactive_breadcrumb_1_1) {
-                exportStar_2(ng2_reactive_breadcrumb_1_1);
+            function (ng_reactive_breadcrumb_1_1) {
+                exportStar_2(ng_reactive_breadcrumb_1_1);
             }],
         execute: function() {
         }
