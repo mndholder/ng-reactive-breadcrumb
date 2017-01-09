@@ -62,7 +62,111 @@ export class AppComponent {
 <ng-reactive-breadcrumb></ng-reactive-breadcrumb>
 ```
 
+## Service configuration
+
+If you use simple route names, then you don't have to configure the service at all, the service will auto-generate names from the paths. For example:
+
+```
+/first -> First
+/first/second -> Second
+/first/second/third -> Third
+/foo_bar -> Foo_bar
+etc.
+```
+
+If your routes is a bit more complicated, the service has to be configured.
+There are two methods to configure the service, the latter one is just a nifty shortcut:
+- ```configureRoute``` method ([link](https://cdn.rawgit.com/mndholder/ng-reactive-breadcrumb/f352419b/docs/classes/_src_services_breadcrumb_service_.breadcrumbservice.html#configureroute))
+- ```configure``` method ([link](https://cdn.rawgit.com/mndholder/ng-reactive-breadcrumb/f352419b/docs/classes/_src_services_breadcrumb_service_.breadcrumbservice.html#configure))
+
+### configureRoute method
+
+This method accepts an Object, which must define the path we are configuring:
+
+```typescript
+import { BreadCrumbService } from 'ng-reactive-breadcrumb';
+
+export class AppComponent {
+    constructor(private _breadCrumbService: BreadCrumbService) {
+        this._breadCrumbService.configureRoute({
+            path: '/one',
+            name: 'ONE'
+        });
+    }
+}
+```
+
+The path can be either a ```string``` or a ```RegExp```, so it is possible to configure more than one route with the same name:
+
+```typescript
+this._breadCrumbService.configureRoute({
+    path: /\/one$/,
+    name: 'ONE'
+});
+```
+
+The name can be anything that is compatible with [Angular async pipe](https://angular.io/docs/ts/latest/api/common/index/AsyncPipe-pipe.html). It can be just a static string or, for example, an Observable:
+
+```typescript
+this._breadCrumbService.configureRoute({
+    path: /\/one$/,
+    name: Observable.of('ONE')
+});
+```
+
+Using the Observable allows changing the name reactively, whenever you like, for example:
+
+```typescript
+let subject = new BehaviorSubject('ONE');
+this._breadCrumbService.configureRoute({
+    path: /\/one$/, 
+    name: subject.asObservable()
+});
+...
+subject.next('TWO'); // The name in the breadcrumb will change to TWO
+...
+subject.next('THREE'); // The name in the breadcrumb will change to THREE
+...
+```
+
+It can even be an ajax request, if you like:
+```typescript
+this._breadCrumbService.configureRoute({
+    path: /\/one$/,
+    name: this._http.get('something')
+});
+```
+
+### configure method
+
+This is just a simple shortcut, which allows configuring many routes at once:
+
+```typescript
+this.breadCrumbService.configure([
+  {path: '/one', name: 'ONE'},
+  {path: '/one/two', name: 'TWO'},
+  {path: '/one/two/three', name: 'Three'}
+]);
+```
+
+### Hiding routes
+
+Some routes can be hidden. If they are hidden, they won't be shown in the breadcrumb trail. To hide the route, use ```hidden``` property:
+
+```typescript
+this.breadCrumbService.configure([
+  {path: '/one', name: 'ONE'},
+  {path: '/one/two', name: 'TWO'},
+  {path: '/one/two/three', name: 'Three', hidden: true} // This will not show up in the breadcrumb, like it never existed
+]);
+```
+
 ## Documentation
+
+Auto-generated documentation is in the repository. Refer to ```docs``` directory or alternatively use these links:
+- [Documentation index](https://cdn.rawgit.com/mndholder/ng-reactive-breadcrumb/f352419b/docs/index.html);
+- [BreadCrumbComponent documentation](https://cdn.rawgit.com/mndholder/ng-reactive-breadcrumb/f352419b/docs/classes/_src_components_breadcrumb_component_.breadcrumbcomponent.html);
+- [BreadCrumbService documentation](https://cdn.rawgit.com/mndholder/ng-reactive-breadcrumb/f352419b/docs/classes/_src_services_breadcrumb_service_.breadcrumbservice.html)
 
 ## Examples
 
