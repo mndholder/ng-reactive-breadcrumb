@@ -233,9 +233,9 @@ System.register("src/ng-reactive-breadcrumb", ['@angular/core', '@angular/platfo
     "use strict";
     var __moduleName = context_3 && context_3.id;
     var core_3, platform_browser_1, common_1, router_2, breadcrumb_component_1, breadcrumb_service_2;
-    var Ng2ReactiveBreadCrumbModule;
+    var NgReactiveBreadCrumbModule;
     var exportedNames_1 = {
-        'Ng2ReactiveBreadCrumbModule': true
+        'NgReactiveBreadCrumbModule': true
     };
     function exportStar_1(m) {
         var exports = {};
@@ -267,10 +267,10 @@ System.register("src/ng-reactive-breadcrumb", ['@angular/core', '@angular/platfo
                 exportStar_1(breadcrumb_service_2_1);
             }],
         execute: function() {
-            Ng2ReactiveBreadCrumbModule = (function () {
-                function Ng2ReactiveBreadCrumbModule() {
+            NgReactiveBreadCrumbModule = (function () {
+                function NgReactiveBreadCrumbModule() {
                 }
-                Ng2ReactiveBreadCrumbModule = __decorate([
+                NgReactiveBreadCrumbModule = __decorate([
                     core_3.NgModule({
                         imports: [
                             platform_browser_1.BrowserModule,
@@ -288,10 +288,10 @@ System.register("src/ng-reactive-breadcrumb", ['@angular/core', '@angular/platfo
                         ]
                     }), 
                     __metadata('design:paramtypes', [])
-                ], Ng2ReactiveBreadCrumbModule);
-                return Ng2ReactiveBreadCrumbModule;
+                ], NgReactiveBreadCrumbModule);
+                return NgReactiveBreadCrumbModule;
             }());
-            exports_3("Ng2ReactiveBreadCrumbModule", Ng2ReactiveBreadCrumbModule);
+            exports_3("NgReactiveBreadCrumbModule", NgReactiveBreadCrumbModule);
         }
     }
 });

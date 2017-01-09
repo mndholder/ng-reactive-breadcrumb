@@ -17,10 +17,10 @@ var common_1 = require('@angular/common');
 var router_1 = require('@angular/router');
 var breadcrumb_component_1 = require('./components/breadcrumb.component');
 var breadcrumb_service_1 = require('./services/breadcrumb.service');
-var Ng2ReactiveBreadCrumbModule = (function () {
-    function Ng2ReactiveBreadCrumbModule() {
+var NgReactiveBreadCrumbModule = (function () {
+    function NgReactiveBreadCrumbModule() {
     }
-    Ng2ReactiveBreadCrumbModule = __decorate([
+    NgReactiveBreadCrumbModule = __decorate([
         core_1.NgModule({
             imports: [
                 platform_browser_1.BrowserModule,
@@ -38,10 +38,10 @@ var Ng2ReactiveBreadCrumbModule = (function () {
             ]
         }), 
         __metadata('design:paramtypes', [])
-    ], Ng2ReactiveBreadCrumbModule);
-    return Ng2ReactiveBreadCrumbModule;
+    ], NgReactiveBreadCrumbModule);
+    return NgReactiveBreadCrumbModule;
 }());
-exports.Ng2ReactiveBreadCrumbModule = Ng2ReactiveBreadCrumbModule;
+exports.NgReactiveBreadCrumbModule = NgReactiveBreadCrumbModule;
 __export(require('./components/breadcrumb.component'));
 __export(require('./services/breadcrumb.service'));
 //# sourceMappingURL=ng-reactive-breadcrumb.js.map

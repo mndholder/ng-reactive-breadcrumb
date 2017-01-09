@@ -22,7 +22,7 @@ import { BreadCrumbService } from './services/breadcrumb.service';
         BreadCrumbComponent
     ]
 })
-export class Ng2ReactiveBreadCrumbModule {}
+export class NgReactiveBreadCrumbModule {}
 
 export * from './components/breadcrumb.component';
 export * from './services/breadcrumb.service';
