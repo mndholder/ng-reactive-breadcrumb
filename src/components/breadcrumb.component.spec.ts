@@ -16,7 +16,7 @@ describe('BreadCrumb Component', () => {
         router = getTestBed().get(Router);
     });
 
-    describe('Instance tests', () => {
+    describe('Instance isolated tests', () => {
 
         let instance: BreadCrumbComponent,
             subscription: Subscription;
