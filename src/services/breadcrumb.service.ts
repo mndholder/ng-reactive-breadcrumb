@@ -91,13 +91,12 @@ export class BreadCrumbService {
         routes.forEach(config => this.configureRoute(config));
     }
 
-    getRouteName(route: string): Observable<any> | EventEmitter<any> {
+    getRouteName(route: string): Observable<any> {
         let config: IBreadCrumbRouteConfig = this._findRouteConfig(route);
         switch (true) {
             // if no config or no name, we'll generate the name
             case !config || !config.name:
-                config.name = Observable.of(this._generateDefaultRouteName(route));
-                break;
+                return Observable.of(this._generateDefaultRouteName(route));
             // if name is a string, return an Observable
             case typeof (config.name) === 'string':
                 config.name = Observable.of(config.name);
@@ -107,17 +106,18 @@ export class BreadCrumbService {
                 let callback = config.name as (path: string) => any;
                 config.name = Observable.create(observer => observer.next(callback(route)));
                 break;
-            // convert subject to observable
+            // convert subject to observable (applies to EventEmitter as well)
             case config.name instanceof Subject:
+            case config.name instanceof EventEmitter:
                 config.name = (config.name as Subject<any>).asObservable();
                 break;
             // convert promise to observable
             case config.name instanceof Promise:
                 config.name = Observable.fromPromise((config.name as Promise<any>));
                 break;
-            // if Observable or EventEmitter - just return it
+            // if Observable - just return it
         }
-        return config.name as Observable<any> | EventEmitter<any>;
+        return config.name as Observable<any>;
     }
 
     isRouteHidden(route: string): boolean {
@@ -136,10 +136,8 @@ export class BreadCrumbService {
             while (!value.done) {
                 let re = value.value;
                 if (re.test(route)) {
-                    if (re.test(route)) {
-                        config = this._routeRegExpConfig.get(re);
-                        break;
-                    }
+                    config = this._routeRegExpConfig.get(re);
+                    break;
                 } else {
                     value = iterator.next();
                 }

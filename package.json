@@ -25,7 +25,8 @@
     "lint": "tslint \"src/**/*.ts\"",
     "start": "npm run app:dev",
     "start:hmr": "npm run app:dev -- --hot",
-    "test": "npm run app:test"
+    "test": "npm run app:test",
+    "test-watch": "npm run app:test-watch"
   },
   "dependencies": {
     "@angular/common": "2.4.1",

@@ -92,8 +92,7 @@ var BreadCrumbService = (function () {
         switch (true) {
             // if no config or no name, we'll generate the name
             case !config || !config.name:
-                config.name = Rx_1.Observable.of(this._generateDefaultRouteName(route));
-                break;
+                return Rx_1.Observable.of(this._generateDefaultRouteName(route));
             // if name is a string, return an Observable
             case typeof (config.name) === 'string':
                 config.name = Rx_1.Observable.of(config.name);
@@ -103,8 +102,9 @@ var BreadCrumbService = (function () {
                 var callback_1 = config.name;
                 config.name = Rx_1.Observable.create(function (observer) { return observer.next(callback_1(route)); });
                 break;
-            // convert subject to observable
+            // convert subject to observable (applies to EventEmitter as well)
             case config.name instanceof Rx_1.Subject:
+            case config.name instanceof core_1.EventEmitter:
                 config.name = config.name.asObservable();
                 break;
             // convert promise to observable
@@ -129,10 +129,8 @@ var BreadCrumbService = (function () {
             while (!value.done) {
                 var re = value.value;
                 if (re.test(route)) {
-                    if (re.test(route)) {
-                        config = this._routeRegExpConfig.get(re);
-                        break;
-                    }
+                    config = this._routeRegExpConfig.get(re);
+                    break;
                 }
                 else {
                     value = iterator.next();
