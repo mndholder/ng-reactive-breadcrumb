@@ -22,6 +22,7 @@
     "bundle": "tsc --project ./src/tsconfig.json -m system --rootDir ./src --outFile ./bundle/ng-reactive-breadcrumb.js",
     "transpile": "tsc --project ./src/tsconfig.json",
     "build": "npm run transpile && npm run bundle",
+    "docs": "cd src/ && typedoc --options typedoc.json && cd ..",
     "lint": "tslint \"src/**/*.ts\"",
     "start": "npm run app:dev",
     "start:hmr": "npm run app:dev -- --hot",

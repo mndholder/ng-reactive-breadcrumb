@@ -7,32 +7,84 @@ import { Subject, Observable } from 'rxjs/Rx';
  * Used to send the data into configureRoute method
  */
 export interface IBreadCrumbRouteConfig {
+    /**
+     * The path to configure.
+     * Can be a string or a RegExp.
+     * String may include wildcart character
+     */
     path: string | RegExp;
+    /**
+     * Name for the configured route.
+     * Can be a static string or an Observable.
+     * Basically can be anything that is compatible with Angular2 asyn pipe
+     */
     name?: string | Function | Observable<any> | Subject<any> | Promise<any> | EventEmitter<any>;
     hidden?: boolean;
     children?: IBreadCrumbRouteConfig[];
 }
 
+/**
+ * Enum to define current navigation status
+ */
 enum NavigationStatus {
+    /**
+     * NavigationStart event
+     * @type {number}
+     */
     START = 1,
+    /**
+     * Routes recognized event
+     * @type {number}
+     */
     ROUTES_RECOGNIZED = 2,
+    /**
+     * NavigationEnd event
+     * @type {number}
+     */
     END = 3
 }
 
+/**
+ * Main breadcrumb services.
+ * Used to subscribe to router events and return names for desired paths and routes.
+ * Should be properly to configured to use advanced features
+ */
 @Injectable()
 export class BreadCrumbService {
-    // Current breadcrumb trail subject
+    /**
+     * Current breadcrumb trail subject
+     * @type {Subject<string[]>}
+     * @private
+     */
     private _trail: Subject<string[]> = new Subject<string[]>();
-    // Current route
+    /**
+     * Current route
+     * @type {string}
+     * @private
+     */
     private _currentRoute: string = '';
-    // Current navigation status
+    /**
+     * Current navigation status
+     */
     private _currentNavigationStatus: NavigationStatus;
-
-    // Map to save route config by the route's name
+    /**
+     * Map to save route config by the route's name
+     * @type {Map<string, IBreadCrumbRouteConfig>}
+     * @private
+     */
     private _routeConfig: Map<string, IBreadCrumbRouteConfig> = new Map<string, IBreadCrumbRouteConfig>();
-    // Additional map to save route config by the route's regexp
+    /**
+     * Additional map to save route config by the route's regexp
+     * @type {Map<RegExp, IBreadCrumbRouteConfig>}
+     * @private
+     */
     private _routeRegExpConfig: Map<RegExp, IBreadCrumbRouteConfig> = new Map<RegExp, IBreadCrumbRouteConfig>();
 
+    /**
+     * Service constructor.
+     * Subscribes to router events
+     * @param _router Application router
+     */
     constructor(private _router: Router) {
         this._router.events
             .do(evt => {
@@ -55,12 +107,23 @@ export class BreadCrumbService {
             });
     }
 
+    /**
+     * Trail getter.
+     * Returns the current trail as an Observable that you have to subscribe to.
+     * Will fire every time the trail changes with new trail values
+     * @returns {Observable<R>} Observable which will be resolved new trail values
+     */
     get trail(): Observable<string[]> {
         return this._trail
             .asObservable()
             .map(urls => [].concat(urls));
     }
 
+    /**
+     * Configure route method.
+     * Used to configure one path
+     * @param config configuration object which implements IBreadCrumbRouteConfig
+     */
     configureRoute(config: IBreadCrumbRouteConfig) {
         if (config.children) {
             config.children.forEach((childConfig: IBreadCrumbRouteConfig) => {
@@ -87,10 +150,20 @@ export class BreadCrumbService {
         }
     }
 
+    /**
+     * Configure routes method.
+     * Used to configure more than one route. Accepts array of IBreadCrumbRouteConfig
+     * @param routes Array of objects which implement IBreadCrumbRouteConfig
+     */
     configure(routes: IBreadCrumbRouteConfig[]) {
         routes.forEach(config => this.configureRoute(config));
     }
 
+    /**
+     * This methods returns the desired route name as an Observable you will have to subscribe to
+     * @param route Route to get the name of
+     * @returns {Observable<any>} Observable which will be resolved with the route's name
+     */
     getRouteName(route: string): Observable<any> {
         let config: IBreadCrumbRouteConfig = this._findRouteConfig(route);
         switch (true) {
@@ -120,11 +193,22 @@ export class BreadCrumbService {
         return config.name as Observable<any>;
     }
 
+    /**
+     * Check if the route is hidden
+     * @param route Route to check
+     * @returns {boolean} true if hidden, false if not
+     */
     isRouteHidden(route: string): boolean {
         let config: IBreadCrumbRouteConfig = this._findRouteConfig(route);
         return !!(config && config.hidden);
     }
 
+    /**
+     * Private method to find the route config in one of two maps
+     * @param route Route, which config we need to find
+     * @returns {IBreadCrumbRouteConfig} Config object which implements IBreadCrumbRouteConfig
+     * @private
+     */
     private _findRouteConfig(route: string): IBreadCrumbRouteConfig {
         let config: IBreadCrumbRouteConfig;
         config = this._routeConfig.get(route);
@@ -146,6 +230,12 @@ export class BreadCrumbService {
         return config;
     }
 
+    /**
+     * Private method which generates breadcrumb trail
+     * @param url Current location url
+     * @returns {string[]} Array of strings, which represent the current breadcrumb trail
+     * @private
+     */
     private _generateBreadcrumbTrail(url: string) {
         let urls: string[] = [];
         while (url.lastIndexOf('/') >= 0) {
@@ -157,6 +247,14 @@ export class BreadCrumbService {
         return urls;
     }
 
+    /**
+     * Default route name generator.
+     * If path is not configured, then the path name is taken and the first character is capitalized.
+     * For example: '/first' -> 'First', '/first/second' -> 'Second', etc
+     * @param url Url to generate the name for
+     * @returns {string|any} Generated name
+     * @private
+     */
     private _generateDefaultRouteName(url: string) {
         let name;
         name = url.substr(url.lastIndexOf('/'), url.length).replace(/^\//, '');

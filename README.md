@@ -7,11 +7,10 @@ The main idea behind it is to add *reactivity* to the path names. The reason is 
 ```typescript
 // Say, we configure a path name
 breadCrumbService.configureRoute({path: '/entity/1', name: entity.name}); // Uh-Oh, we do not have the name yet
-````
+```
 
-Adding observables to the game allows us to do this and even much more!
+Adding observables to the game allows us to do this and even much more. We can use an Observable or a Promise, which will return the name later, we can even make an ajax call!
 
-We can use an Observable or Promise, which will return the name later, we can even make an ajax call!
 ```typescript
 breadCrumbService.configureRoute({path: '/entity/1', name: this.http.get('api/entity/1').map(data => data.name)});
 ```
