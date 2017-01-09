@@ -6,13 +6,19 @@ The main idea behind it is to add *reactivity* to the path names. The reason is 
 
 ```typescript
 // Say, we configure a path name
-breadCrumbService.configureRoute({path: '/entity/1', name: entity.name}); // Uh-Oh, we do not have the name yet
+breadCrumbService.configureRoute({
+    path: '/entity/1',
+    name: entity.name
+}); // Uh-oh, we do not have the name yet
 ```
 
 Adding observables to the game allows us to do this and even much more. We can use an Observable or a Promise, which will return the name later, we can even make an ajax call!
 
 ```typescript
-breadCrumbService.configureRoute({path: '/entity/1', name: this.http.get('api/entity/1').map(data => data.name)});
+breadCrumbService.configureRoute({
+    path: '/entity/1',
+    name: this.http.get('api/entity/1').map(data => data.name)
+});
 ```
 
 Observables are really a game changer here. But if you're looking for a simple static configuration - it is supported as well.
@@ -156,8 +162,8 @@ Some routes can be hidden. If they are hidden, they won't be shown in the breadc
 ```typescript
 this.breadCrumbService.configure([
   {path: '/one', name: 'ONE'},
-  {path: '/one/two', name: 'TWO'},
-  {path: '/one/two/three', name: 'Three', hidden: true} // This will not show up in the breadcrumb, like it never existed
+  {path: '/one/two', name: 'TWO', hidden: true}, // // This will not show up in the breadcrumb,
+  {path: '/one/two/three', name: 'Three'}
 ]);
 ```
 
