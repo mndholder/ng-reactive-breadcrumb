@@ -10,7 +10,7 @@
         "noImplicitAny": false
     },
     "include": [
-        "../ng2-reactive-breadcrumb.ts"
+        "../ng-reactive-breadcrumb.ts"
     ],
     "exclude": [
         "../app"

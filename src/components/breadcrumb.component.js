@@ -10,27 +10,59 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var breadcrumb_service_1 = require('../services/breadcrumb.service');
+/**
+ * Component metadata class.
+ * This class can be extended and then use to extend the built-in component
+ */
 var BreadCrumbComponentMetadata = (function () {
     function BreadCrumbComponentMetadata() {
+        /**
+         * Standard angular selector property. Change to whatever you desire
+         * @type {string}
+         */
         this.selector = 'ng-reactive-breadcrumb';
+        /**
+         * Standard Angular template property. Change to whatever you desire
+         * @type {string}
+         */
         this.template = "\n        <ol class=\"breadcrumb\">\n            <li *ngFor=\"let url of urls; let last = last\" [ngClass]=\"{'active': last}\">\n                <a role=\"button\" *ngIf=\"!last\" [routerLink]=\"url\">\n                    {{getRouteName(url) | async}}\n                </a>\n                <span *ngIf=\"last\">\n                    {{getRouteName(url) | async}}\n                </span>\n            </li>\n        </ol>\n    ";
     }
     return BreadCrumbComponentMetadata;
 }());
 exports.BreadCrumbComponentMetadata = BreadCrumbComponentMetadata;
+/**
+ * Breadcrumb component.
+ * Simple built-in component to render breadcrumb trail
+ */
 var BreadCrumbComponent = (function () {
+    /**
+     * Component constructor. Subscribes to the breadcrumb trail
+     * @param _breadCrumbService BreadCrumb service which will fire trail changes
+     */
     function BreadCrumbComponent(_breadCrumbService) {
         var _this = this;
         this._breadCrumbService = _breadCrumbService;
+        /**
+         * Input property which limits the trail to the minimum number of entries to fill in the urls property
+         * @type {number}
+         */
         this.min = 0;
         this._subscription = this._breadCrumbService.trail
             .subscribe(function (urls) {
             _this.urls = urls.length >= _this.min ? urls : [];
         });
     }
+    /**
+     * Method allows to receive a route name
+     * @param url Route(Path) to receive the name of
+     * @returns {Observable<any>} Name as an Observable which you will have to subscribe to
+     */
     BreadCrumbComponent.prototype.getRouteName = function (url) {
         return this._breadCrumbService.getRouteName(url);
     };
+    /**
+     * Destroy method. Unsubscribes from the breadcrumb trail
+     */
     BreadCrumbComponent.prototype.ngOnDestroy = function () {
         this._subscription.unsubscribe();
     };

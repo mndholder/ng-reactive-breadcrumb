@@ -3,4 +3,4 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 __export(require('./src/ng-reactive-breadcrumb'));
-//# sourceMappingURL=ng2-reactive-breadcrumb.js.map
+//# sourceMappingURL=ng-reactive-breadcrumb.js.map
