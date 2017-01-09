@@ -19,7 +19,7 @@
     "app:server": "http-server dist/ --push-state",
     "preapp:serve": "npm run app:build",
     "app:serve": "npm run app:server",
-    "bundle": "tsc --project ./src/tsconfig.json -m system --rootDir ./src --outFile ./bundle/ng2-reactive-breadcrumb.js",
+    "bundle": "tsc --project ./src/tsconfig.json -m system --rootDir ./src --outFile ./bundle/ng-reactive-breadcrumb.js",
     "transpile": "tsc --project ./src/tsconfig.json",
     "build": "npm run transpile && npm run bundle",
     "lint": "tslint \"src/**/*.ts\"",

@@ -314,4 +314,4 @@ System.register("ng2-reactive-breadcrumb", ["src/ng-reactive-breadcrumb"], funct
         }
     }
 });
-//# sourceMappingURL=ng2-reactive-breadcrumb.js.map
+//# sourceMappingURL=ng-reactive-breadcrumb.js.map
